@@ -2,7 +2,7 @@ CC	=	gcc
 
 LDFLAGS = -lSDL2main -lSDL2 
 
-SRC	=	$(wildcard *.c)
+SRC	=	$(wildcard *.c) $(wildcard config/*.c)
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -13,7 +13,7 @@ RM	=	rm -f
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	gcc -o $(NAME) $(SRC) -I includes $(LDFLAGS)
+	gcc -o $(NAME) $(SRC) -I../config $(LDFLAGS)
 
 clean:
 	$(RM) $(OBJ)
