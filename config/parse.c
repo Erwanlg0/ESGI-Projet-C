@@ -3,9 +3,9 @@
 
 char *file_to_buffer(FILE *file, char *buffer) {
 
-  char temp[MAX_LINE];
+  char temp[MAX_BUFFER_SIZE];
 
-  while (fgets(temp, MAX_LINE, file) != NULL) {
+  while (fgets(temp, MAX_BUFFER_SIZE, file) != NULL) {
     strcat(buffer, temp);
   }
 

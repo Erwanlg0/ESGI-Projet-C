@@ -3,7 +3,7 @@
 int main() {
 
   FILE *file = fopen("text.txt", "r");
-  char *buffer = malloc(sizeof(char) * MAX_LINE);
+  char *buffer = malloc(sizeof(char) * MAX_BUFFER_SIZE);
 
   if (file == NULL)
     return 1;
