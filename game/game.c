@@ -44,3 +44,21 @@ SHAPE = {
         {{1, 0}, {1, 1}, {1, 2}, {2, 2}},
         {{0, 1}, {1, 1}, {2, 1}, {0, 2}},
         {{0, 0}, {1, 0}, {1, 1}, {1, 2}}}};
+
+void Game_Init(Game *game)
+{
+    int row, col;
+
+    for (row = 0; row < GRID_HEIGHT; row++)
+    {
+        for (col = 0; col < GRID_WIDTH; col++)
+        {
+            game->grid[row][col] = 0;
+        }
+    }
+
+    game->score = 0;
+    game->level = 1;
+    game->linesCleared = 0;
+    game->state = GAME_RUNNING;
+}
