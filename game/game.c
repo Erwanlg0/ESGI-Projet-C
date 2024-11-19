@@ -47,6 +47,7 @@ static const Position tetrominoShapes[TOTAL_TETROMINOS][4][TETROMINO_SIZE] = {
         {{1, 0}, {1, 1}, {1, 2}, {2, 2}},
         {{0, 1}, {1, 1}, {2, 1}, {0, 2}},
         {{0, 0}, {1, 0}, {1, 1}, {1, 2}}}};
+
 void Game_Init(Game *game)
 {
     int row, col;
@@ -87,4 +88,25 @@ static void SpawnTetromino(Game *game)
 
     game->nextTetromino.type = (TetrominoType)(rand() % TOTAL_TETROMINOS);
     game->nextTetromino.rotation = 0;
+}
+
+void Game_Pause(Game *game)
+{
+    if (game->state == GAME_RUNNING)
+    {
+        game->state = GAME_PAUSED;
+    }
+}
+
+void Game_Resume(Game *game)
+{
+    if (game->state == GAME_PAUSED)
+    {
+        game->state = GAME_RUNNING;
+    }
+}
+
+bool Game_IsGameOver(const Game *game)
+{
+    return game->state == GAME_OVER;
 }
