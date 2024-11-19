@@ -1,7 +1,7 @@
 #include "game.h"
 #include <stdlib.h>
 
-piece = {
+SHAPE = {
     /* I */
     {
         {{0, 1}, {1, 1}, {2, 1}, {3, 1}},
