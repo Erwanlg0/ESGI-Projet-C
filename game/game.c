@@ -51,7 +51,6 @@ static const Position tetrominoShapes[TOTAL_TETROMINOS][4][TETROMINO_SIZE] = {
 void Game_Init(Game *game)
 {
     int row, col;
-
     for (row = 0; row < GRID_HEIGHT; row++)
     {
         for (col = 0; col < GRID_WIDTH; col++)
@@ -59,15 +58,12 @@ void Game_Init(Game *game)
             game->grid[row][col] = 0;
         }
     }
-
     game->score = 0;
     game->level = 1;
     game->linesCleared = 0;
     game->state = GAME_RUNNING;
-
     game->nextTetromino.type = (TetrominoType)(rand() % TOTAL_TETROMINOS);
     game->nextTetromino.rotation = 0;
-
     SpawnTetromino(game);
 }
 
@@ -76,18 +72,43 @@ static void SpawnTetromino(Game *game)
     int i;
     TetrominoType type = game->nextTetromino.type;
     int rotation = 0;
-
     game->currentTetromino.type = type;
     game->currentTetromino.rotation = rotation;
-
     for (i = 0; i < TETROMINO_SIZE; i++)
     {
         game->currentTetromino.blocks[i].x = (GRID_WIDTH / 2) + tetrominoShapes[type][rotation][i].x;
         game->currentTetromino.blocks[i].y = tetrominoShapes[type][rotation][i].y;
     }
-
     game->nextTetromino.type = (TetrominoType)(rand() % TOTAL_TETROMINOS);
     game->nextTetromino.rotation = 0;
+}
+
+void Game_MoveLeft(Game *game)
+{
+    Tetromino movedTetromino = game->currentTetromino;
+    int i;
+    for (i = 0; i < TETROMINO_SIZE; i++)
+    {
+        movedTetromino.blocks[i].x -= 1;
+    }
+    if (!CheckCollision(game, &movedTetromino))
+    {
+        game->currentTetromino = movedTetromino;
+    }
+}
+
+void Game_MoveRight(Game *game)
+{
+    Tetromino movedTetromino = game->currentTetromino;
+    int i;
+    for (i = 0; i < TETROMINO_SIZE; i++)
+    {
+        movedTetromino.blocks[i].x += 1;
+    }
+    if (!CheckCollision(game, &movedTetromino))
+    {
+        game->currentTetromino = movedTetromino;
+    }
 }
 
 void Game_Pause(Game *game)
