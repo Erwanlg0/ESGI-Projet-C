@@ -3,7 +3,6 @@
 #include <string.h>
 
 static void SpawnTetromino(Game *game);
-
 static const Position tetrominoShapes[TOTAL_TETROMINOS][4][TETROMINO_SIZE] = {
     /* I */
     {
@@ -152,6 +151,37 @@ void Game_Drop(Game *game)
     else
     {
         game->currentTetromino = movedTetromino;
+    }
+}
+
+static void UpdateLevel(Game *game)
+{
+    int newLevel = (game->linesCleared / 10) + 1;
+    if (newLevel > game->level)
+    {
+        game->level = newLevel;
+    }
+}
+
+void Game_Rotate(Game *game)
+{
+    Tetromino rotatedTetromino = game->currentTetromino;
+    rotatedTetromino.rotation = (rotatedTetromino.rotation + 1) % 4;
+    TetrominoType type = rotatedTetromino.type;
+    int rotation = rotatedTetromino.rotation;
+    int baseX = rotatedTetromino.blocks[0].x;
+    int baseY = rotatedTetromino.blocks[0].y;
+    int i;
+
+    for (i = 0; i < TETROMINO_SIZE; i++)
+    {
+        rotatedTetromino.blocks[i].x = baseX + tetrominoShapes[type][rotation][i].x;
+        rotatedTetromino.blocks[i].y = baseY + tetrominoShapes[type][rotation][i].y;
+    }
+
+    if (!CheckCollision(game, &rotatedTetromino))
+    {
+        game->currentTetromino = rotatedTetromino;
     }
 }
 
