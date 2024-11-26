@@ -131,3 +131,35 @@ bool Game_IsGameOver(const Game *game)
 {
     return game->state == GAME_OVER;
 }
+
+void Game_Drop(Game *game)
+{
+    Tetromino movedTetromino = game->currentTetromino;
+    int i;
+
+    for (i = 0; i < TETROMINO_SIZE; i++)
+    {
+        movedTetromino.blocks[i].y += 1;
+    }
+    if (CheckCollision(game, &movedTetromino))
+    {
+        SpawnTetromino(game);
+        if (CheckCollision(game, &game->currentTetromino))
+        {
+            game->state = GAME_OVER;
+        }
+    }
+    else
+    {
+        game->currentTetromino = movedTetromino;
+    }
+}
+
+void Game_Update(Game *game)
+{
+    if (game->state != GAME_RUNNING)
+    {
+        return;
+    }
+    Game_Drop(game);
+}
