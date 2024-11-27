@@ -1,6 +1,7 @@
 #include "config/parse.h"
 
-int main() {
+int main()
+{
 
   FILE *file = fopen("text.txt", "r");
   char *buffer = malloc(sizeof(char) * MAX_BUFFER_SIZE);
