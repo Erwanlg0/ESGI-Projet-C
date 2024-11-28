@@ -1,3 +1,8 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#include <stdbool.h>
+
 typedef struct
 {
     char moveLeft;
@@ -15,3 +20,7 @@ typedef struct
     int gridWidth;
     int gridHeight;
 } Settings;
+
+bool LoadSettings(Settings *settings, const char *filePath);
+
+#endif

@@ -1,3 +1,4 @@
+#include "config.h"
 #include "game.h"
 #include <stdlib.h>
 #include <string.h>
@@ -52,7 +53,7 @@ static const Position tetrominoShapes[TOTAL_TETROMINOS][4][TETROMINO_SIZE] = {
         {{0, 1}, {1, 1}, {2, 1}, {0, 2}},
         {{0, 0}, {1, 0}, {1, 1}, {1, 2}}}};
 
-void Game_Init(Game *game)
+void Game_Init(Game *game, const struct Settings *settings)
 {
     int row, col;
     for (row = 0; row < GRID_HEIGHT; row++)
@@ -63,7 +64,7 @@ void Game_Init(Game *game)
         }
     }
     game->score = 0;
-    game->level = 1;
+    game->level = settings->initialLevel;
     game->linesCleared = 0;
     game->state = GAME_RUNNING;
     game->nextTetromino.type = (TetrominoType)(rand() % TOTAL_TETROMINOS);

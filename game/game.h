@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+struct Settings;
+
 #define GRID_WIDTH 10
 #define GRID_HEIGHT 20
 #define TETROMINO_SIZE 4
@@ -51,7 +53,7 @@ typedef struct
     GameState state;
 } Game;
 
-void Game_Init(Game *game);
+void Game_Init(Game *game, const struct Settings *settings);
 void Game_Update(Game *game);
 void Game_MoveLeft(Game *game);
 void Game_MoveRight(Game *game);
