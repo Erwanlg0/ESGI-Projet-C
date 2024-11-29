@@ -13,7 +13,7 @@ typedef struct
     char quit;
 } KeyBindings;
 
-typedef struct
+typedef struct Settings
 {
     KeyBindings keyBindings;
     int initialLevel;
