@@ -12,7 +12,7 @@ SDL_Keycode StringToKeycode(const char *key)
     if (strcmp(key, "escape") == 0)
         return SDLK_ESCAPE;
     if (strlen(key) == 1)
-        return SDL_Keycode(key[0]);
+        return (SDL_Keycode)key[0];
     return 0;
 }
 

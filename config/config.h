@@ -22,6 +22,7 @@ typedef struct Settings
     int gridHeight;
 } Settings;
 
+SDL_Keycode StringToKeycode(const char *key);
 bool LoadSettings(Settings *settings, const char *filePath);
 
 #endif
