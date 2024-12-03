@@ -1,16 +1,17 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <SDL2/SDL.h>
 #include <stdbool.h>
 
 typedef struct
 {
-    char moveLeft;
-    char moveRight;
-    char drop;
-    char rotate;
-    char hardDrop;
-    char quit;
+    SDL_Keycode moveLeft;
+    SDL_Keycode moveRight;
+    SDL_Keycode drop;
+    SDL_Keycode rotate;
+    SDL_Keycode hardDrop;
+    SDL_Keycode quit;
 } KeyBindings;
 
 typedef struct Settings

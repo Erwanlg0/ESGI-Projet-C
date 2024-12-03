@@ -2,7 +2,19 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <SDL2/SDL.h>
 #include "config.h"
+
+SDL_Keycode StringToKeycode(const char *key)
+{
+    if (strcmp(key, "space") == 0)
+        return SDLK_SPACE;
+    if (strcmp(key, "escape") == 0)
+        return SDLK_ESCAPE;
+    if (strlen(key) == 1)
+        return SDL_Keycode(key[0]);
+    return 0;
+}
 
 bool LoadSettings(Settings *settings, const char *filePath)
 {
@@ -20,17 +32,17 @@ bool LoadSettings(Settings *settings, const char *filePath)
         if (sscanf(line, "%49[^=]=%49s", key, value) == 2)
         {
             if (strcmp(key, "moveLeft") == 0)
-                settings->keyBindings.moveLeft = value[0];
+                settings->keyBindings.moveLeft = StringToKeycode(value);
             else if (strcmp(key, "moveRight") == 0)
-                settings->keyBindings.moveRight = value[0];
+                settings->keyBindings.moveRight = StringToKeycode(value);
             else if (strcmp(key, "drop") == 0)
-                settings->keyBindings.drop = value[0];
+                settings->keyBindings.drop = StringToKeycode(value);
             else if (strcmp(key, "rotate") == 0)
-                settings->keyBindings.rotate = value[0];
+                settings->keyBindings.rotate = StringToKeycode(value);
             else if (strcmp(key, "hardDrop") == 0)
-                settings->keyBindings.hardDrop = value[0];
+                settings->keyBindings.hardDrop = StringToKeycode(value);
             else if (strcmp(key, "quit") == 0)
-                settings->keyBindings.quit = value[0];
+                settings->keyBindings.quit = StringToKeycode(value);
         }
     }
 
