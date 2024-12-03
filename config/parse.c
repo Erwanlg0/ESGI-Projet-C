@@ -32,10 +32,35 @@ int is_valid_language(char *language) {
   char list_lan[2][3] = {"fr", "en"};
 
   for (int i = 0; i < 2; i++) {
-
     if (strcmp(language, list_lan[i]) == 0) {
       return 1;
     }
   }
-  return 0;
+  return -1;
+}
+
+char *is_mode(char *buffer, char *mode) {
+  int n;
+  char *line = strtok(buffer, "\n");
+
+  while (line != NULL) {
+    if (strstr(line, "Sound Mode =") == line) {
+      n = sscanf(line, "Sound Mode = %20s", mode);
+    }
+
+    line = strtok(NULL, "\n");
+  }
+
+  return n == 1 ? mode : NULL;
+}
+
+int is_valid_mode(char *mode) {
+  char list_mode[3][20] = {"classic", "mario", "elden ring"};
+
+  for (int i = 0; i < 3; i++) {
+    if (strcmp(mode, list_mode[i]) == 0) {
+      return 1;
+    }
+  }
+  return -1;
 }
