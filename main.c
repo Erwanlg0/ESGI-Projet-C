@@ -13,7 +13,7 @@ int main() {
   printf("%s", buffer);
 
   language = is_language(buffer, language);
-  if (is_valid_language(language) == 1) {
+  if (is_valid_language(language) == 0) {
     printf("Langue non prise en compte");
     return 1;
   }

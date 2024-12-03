@@ -29,13 +29,13 @@ char *is_language(char *buffer, char language[3]) {
 }
 
 int is_valid_language(char *language) {
-  char list_lan[2][2] = {"fr", "en"};
-  int count;
+  char list_lan[2][3] = {"fr", "en"};
 
   for (int i = 0; i < 2; i++) {
-    if (language == list_lan[i]) {
-      count = 1;
+
+    if (strcmp(language, list_lan[i]) == 0) {
+      return 1;
     }
   }
-  return count == 1 ? 0 : 1;
+  return 0;
 }
