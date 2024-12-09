@@ -2,30 +2,19 @@
 #include <stdio.h>
 #include <string.h>
 
-char *file_to_buffer(FILE *file, char *buffer) {
-
+char *get_language(FILE *file, char *language) {
   char temp[MAX_BUFFER_SIZE];
+  int n = 0;
 
   while (fgets(temp, MAX_BUFFER_SIZE, file) != NULL) {
-    strcat(buffer, temp);
-  }
-
-  return buffer;
-}
-
-char *is_language(char *buffer, char language[3]) {
-  int n;
-  char *line = strtok(buffer, "\n");
-
-  while (line != NULL) {
-    if (strstr(line, "Language =") == line) {
-      n = sscanf(line, "Language = %2s", language);
+    if (strncmp(temp, "LANGUAGE=", 9) == 0) {
+      n = sscanf(temp, "LANGUAGE=%2s", language);
+      if (n == 1) {
+        return language;
+      }
     }
-
-    line = strtok(NULL, "\n");
   }
-
-  return n == 1 ? language : NULL;
+  return NULL;
 }
 
 int is_valid_language(char *language) {
@@ -39,26 +28,26 @@ int is_valid_language(char *language) {
   return -1;
 }
 
-char *is_mode(char *buffer, char *mode) {
-  int n;
-  char *line = strtok(buffer, "\n");
+char *get_music(FILE *file, char *music) {
+  char temp[MAX_BUFFER_SIZE];
+  int n = 0;
 
-  while (line != NULL) {
-    if (strstr(line, "Sound Mode =") == line) {
-      n = sscanf(line, "Sound Mode = %20s", mode);
+  while (fgets(temp, MAX_BUFFER_SIZE, file) != NULL) {
+    if (strncmp(temp, "MUSIC=", 6) == 0) {
+      n = sscanf(temp, "MUSIC=%20s", music);
+      if (n == 1) {
+        return music;
+      }
     }
-
-    line = strtok(NULL, "\n");
   }
-
-  return n == 1 ? mode : NULL;
+  return NULL;
 }
 
-int is_valid_mode(char *mode) {
-  char list_mode[3][20] = {"classic", "mario", "elden ring"};
+int is_valid_music(char *music) {
+  char list_music[3][20] = {"classic", "mario", "elden_ring"};
 
   for (int i = 0; i < 3; i++) {
-    if (strcmp(mode, list_mode[i]) == 0) {
+    if (strcmp(music, list_music[i]) == 0) {
       return 1;
     }
   }

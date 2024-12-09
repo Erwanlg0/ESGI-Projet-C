@@ -6,10 +6,9 @@
 
 #define MAX_BUFFER_SIZE 10000
 
-char *file_to_buffer(FILE *file, char *buffer);
-char *is_language(char *buffer, char language[3]);
+char *get_language(FILE *file, char language[3]);
 int is_valid_language(char *language);
-char *is_mode(char *buffer, char *mode);
-int is_valid_mode(char *mode);
+char *get_music(FILE *file, char *music);
+int is_valid_music(char *music);
 
 #endif
