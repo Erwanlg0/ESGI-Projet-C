@@ -1,7 +1,7 @@
 #include "config.h"
 #include "parse.h"
 
-int check_config(FILE *file, char *language, char *music) {
+int check_config(FILE *file, char *language, char *difficulty, char *music) {
 
   if (get_language(file, language) == NULL) {
     printf("Langue indisponible ou au mauvais format");
@@ -23,6 +23,15 @@ int check_config(FILE *file, char *language, char *music) {
   }
   printf("La musique choisie est : %s\n", music);
 
+  if (get_difficulty(file, difficulty) == NULL) {
+    printf("difficulte indisponible ou au mauvais format");
+    return 1;
+  }
+  if (check_difficulty(difficulty) == -1) {
+    printf("difficulte non pris en compte");
+    return 1;
+  }
+  printf("La difficulte choisie est : %s\n", difficulty);
   fclose(file);
 
   return 0;

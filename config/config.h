@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int check_config(FILE *file, char *language, char *music);
+int check_config(FILE *file, char *language, char *difficulty, char *music);
 
 #endif
