@@ -1,21 +1,16 @@
-#include "config/parse.h"
+#include "config/config.h"
 
 int main() {
 
   FILE *file = fopen("text.txt", "r");
-  char *buffer = malloc(sizeof(char) * MAX_BUFFER_SIZE);
   char *language = malloc(sizeof(char) * 3);
+  char *music = malloc(sizeof(char) * 20);
 
   if (file == NULL)
     return 1;
 
-  buffer = file_to_buffer(file, buffer);
-  printf("%s", buffer);
-
-  language = is_language(buffer, language);
-  if (is_valid_language(language) == 0) {
-    printf("Langue non prise en compte");
-    return 1;
+  int res = check_config(file, language, music);
+  if (!res) {
+    exit(0);
   }
-  printf("%s", language);
 }
