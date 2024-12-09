@@ -1,5 +1,3 @@
-Language = fr
-
-Sound_mode = funny
-
-difficutly = easy
+LANGUAGE=fr
+MUSIC=elden_ring
+DIFFICULTY=easy
