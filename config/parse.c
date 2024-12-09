@@ -17,7 +17,7 @@ char *get_language(FILE *file, char *language) {
   return NULL;
 }
 
-int is_valid_language(char *language) {
+int check_language(char *language) {
   char list_lan[2][3] = {"fr", "en"};
 
   for (int i = 0; i < 2; i++) {
@@ -43,7 +43,7 @@ char *get_music(FILE *file, char *music) {
   return NULL;
 }
 
-int is_valid_music(char *music) {
+int check_music(char *music) {
   char list_music[3][20] = {"classic", "mario", "elden_ring"};
 
   for (int i = 0; i < 3; i++) {

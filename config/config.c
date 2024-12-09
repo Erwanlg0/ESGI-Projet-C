@@ -7,7 +7,7 @@ int check_config(FILE *file, char *language, char *difficulty, char *music) {
     printf("Langue indisponible ou au mauvais format");
     return 1;
   }
-  if (is_valid_language(language) == -1) {
+  if (check_language(language) == -1) {
     printf("Langue non prise en compte");
     return 1;
   }
@@ -17,7 +17,7 @@ int check_config(FILE *file, char *language, char *difficulty, char *music) {
     printf("musique indisponible ou au mauvais format");
     return 1;
   }
-  if (is_valid_music(music) == -1) {
+  if (check_music(music) == -1) {
     printf("musique non pris en compte");
     return 1;
   }
