@@ -79,3 +79,39 @@ int check_difficulty(char *difficulty) {
   }
   return -1;
 }
+
+int *get_width(FILE *file, int *width) {
+  char temp[MAX_BUFFER_SIZE];
+  int n = 0;
+
+  while (fgets(temp, MAX_BUFFER_SIZE, file) != NULL) {
+    if (strncmp(temp, "WIDTH=", 6) == 0) {
+      n = sscanf(temp, "WIDTH=%d", width);
+      if (n == 1) {
+        return width;
+      }
+    }
+  }
+  return NULL;
+}
+
+int check_width(int *width) { return *width >= 400 || *width <= 1000 ? 1 : -1; }
+
+int *get_height(FILE *file, int *height) {
+  char temp[MAX_BUFFER_SIZE];
+  int n = 0;
+
+  while (fgets(temp, MAX_BUFFER_SIZE, file) != NULL) {
+    if (strncmp(temp, "HEIGHT=", 7) == 0) {
+      n = sscanf(temp, "HEIGHT=%d", height);
+      if (n == 1) {
+        return height;
+      }
+    }
+  }
+  return NULL;
+}
+
+int check_height(int *height) {
+  return *height >= 400 || *height <= 1000 ? 1 : -1;
+}
