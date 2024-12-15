@@ -5,5 +5,6 @@
 #include <stdlib.h>
 
 int check_config(FILE *file, char *language, char *difficulty, char *music);
+int check_win_size(FILE *file, int *width, int *height);
 
 #endif

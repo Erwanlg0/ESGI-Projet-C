@@ -32,7 +32,32 @@ int check_config(FILE *file, char *language, char *difficulty, char *music) {
     return 1;
   }
   printf("La difficulte choisie est : %s\n", difficulty);
-  fclose(file);
+
+  return 0;
+}
+
+int check_win_size(FILE *file, int *width, int *height) {
+  if (get_width(file, width) == NULL) {
+    printf("Largeur indisponible ou au mauvais format");
+    return 1;
+  }
+  if (check_width(width) == -1) {
+    printf("Hauteur non prise en compte");
+    return 1;
+  }
+
+  printf("La hauteur choisie est : %d\n", *width);
+
+  if (get_height(file, height) == NULL) {
+    printf("Largeur indisponible ou au mauvais format");
+    return 1;
+  }
+  if (check_height(height) == -1) {
+    printf("Hauteur non prise en compte");
+    return 1;
+  }
+
+  printf("La hauteur choisie est : %d\n", *height);
 
   return 0;
 }
