@@ -1,5 +1,0 @@
-Language = fr
-
-Sound_mode = funny
-
-difficutly = easy
