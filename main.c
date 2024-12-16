@@ -1,4 +1,4 @@
-#include "config/config.h"
+#include "config/check_parsing.h"
 
 int main() {
 
