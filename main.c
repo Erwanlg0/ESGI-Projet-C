@@ -14,7 +14,7 @@ int main() {
 
   int res = check_config(file, language, difficulty, music);
   int error = check_win_size(file, width, height);
-  if (!error) {
+  if (!error || !res) {
     exit(0);
   }
 }
