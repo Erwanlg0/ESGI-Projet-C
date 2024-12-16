@@ -3,6 +3,7 @@
 #include <string.h>
 
 char *get_language(FILE *file, char *language) {
+  rewind(file);
   char temp[MAX_BUFFER_SIZE];
   int n = 0;
 
@@ -29,6 +30,7 @@ int check_language(char *language) {
 }
 
 char *get_music(FILE *file, char *music) {
+  rewind(file);
   char temp[MAX_BUFFER_SIZE];
   int n = 0;
 
@@ -55,6 +57,7 @@ int check_music(char *music) {
 }
 
 char *get_difficulty(FILE *file, char *difficulty) {
+  rewind(file);
   char temp[MAX_BUFFER_SIZE];
   int n = 0;
 
@@ -81,6 +84,7 @@ int check_difficulty(char *difficulty) {
 }
 
 int *get_width(FILE *file, int *width) {
+  rewind(file);
   char temp[MAX_BUFFER_SIZE];
   int n = 0;
 
@@ -98,6 +102,7 @@ int *get_width(FILE *file, int *width) {
 int check_width(int *width) { return *width >= 400 || *width <= 1000 ? 1 : -1; }
 
 int *get_height(FILE *file, int *height) {
+  rewind(file);
   char temp[MAX_BUFFER_SIZE];
   int n = 0;
 
