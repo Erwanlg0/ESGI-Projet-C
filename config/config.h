@@ -1,10 +1,26 @@
-#ifndef __CONFIG_H__
-#define __CONFIG_H__
+#ifndef CONFIG_H
+#define CONFIG_H
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <SDL2/SDL.h>
+#include <stdbool.h>
 
-int check_config(FILE *file, char *language, char *difficulty, char *music);
-int check_win_size(FILE *file, int *width, int *height);
+typedef struct {
+  SDL_Keycode moveLeft;
+  SDL_Keycode moveRight;
+  SDL_Keycode drop;
+  SDL_Keycode rotate;
+  SDL_Keycode hardDrop;
+  SDL_Keycode quit;
+} KeyBindings;
+
+typedef struct Settings {
+  KeyBindings keyBindings;
+  int initialLevel;
+  int gridWidth;
+  int gridHeight;
+} Settings;
+
+SDL_Keycode StringToKeycode(const char *key);
+bool LoadSettings(Settings *settings, const char *filePath);
 
 #endif

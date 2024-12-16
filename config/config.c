@@ -1,69 +1,46 @@
 #include "config.h"
-#include "parse.h"
+#include <SDL2/SDL.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int check_config(FILE *file, char *language, char *difficulty, char *music) {
-  int language_error;
-  int difficulty_error;
-  int music_error;
-
-  if (get_language(file, language) == NULL) {
-    printf("Langue indisponible ou au mauvais format\n");
-    language_error = 1;
-  } else if (check_language(language) == -1) {
-    printf("Langue non prise en compte\n");
-    language_error = 1;
-  } else {
-    printf("La langue choisie est : %s\n", language);
-  }
-
-  if (get_music(file, music) == NULL) {
-    printf("musique indisponible ou au mauvais format\n");
-    music_error = 1;
-  } else if (check_music(music) == -1) {
-    printf("musique non pris en compte\n");
-    music_error = 1;
-  } else {
-    printf("La musique choisie est : %s\n", music);
-  }
-
-  if (get_difficulty(file, difficulty) == NULL) {
-    printf("difficulte indisponible ou au mauvais format\n");
-    difficulty_error = 1;
-  }
-
-  else if (check_difficulty(difficulty) == -1) {
-    printf("difficulte non pris en compte\n");
-    difficulty_error = 1;
-  } else {
-    printf("La difficulte choisie est : %s\n", difficulty);
-  }
-
-  return !(language_error || music_error || difficulty_error);
+SDL_Keycode StringToKeycode(const char *key) {
+  if (strcmp(key, "space") == 0)
+    return SDLK_SPACE;
+  if (strcmp(key, "escape") == 0)
+    return SDLK_ESCAPE;
+  if (strlen(key) == 1)
+    return (SDL_Keycode)key[0];
+  return 0;
 }
 
-int check_win_size(FILE *file, int *width, int *height) {
-  int width_error;
-  int height_error;
-
-  if (get_width(file, width) == NULL) {
-    printf("Largeur indisponible ou au mauvais format\n");
-    width_error = 1;
-  } else if (check_width(width) == -1) {
-    printf("Hauteur non prise en compte\n");
-    width_error = 1;
-  } else {
-    printf("La hauteur choisie est : %d\n", *width);
+bool LoadSettings(Settings *settings, const char *filePath) {
+  FILE *file = fopen(filePath, "r");
+  if (file == NULL) {
+    printf("Erreur : impossible d'ouvrir le fichier de configuration.\n");
+    return false;
   }
 
-  if (get_height(file, height) == NULL) {
-    printf("Largeur indisponible ou au mauvais format\n");
-    return 1;
-  } else if (check_height(height) == -1) {
-    printf("Hauteur non prise en compte\n");
-    return 1;
-  } else {
-    printf("La hauteur choisie est : %d\n", *height);
+  char line[256];
+  while (fgets(line, sizeof(line), file)) {
+    char key[50], value[50];
+    if (sscanf(line, "%49[^=]=%49s", key, value) == 2) {
+      if (strcmp(key, "moveLeft") == 0)
+        settings->keyBindings.moveLeft = StringToKeycode(value);
+      else if (strcmp(key, "moveRight") == 0)
+        settings->keyBindings.moveRight = StringToKeycode(value);
+      else if (strcmp(key, "drop") == 0)
+        settings->keyBindings.drop = StringToKeycode(value);
+      else if (strcmp(key, "rotate") == 0)
+        settings->keyBindings.rotate = StringToKeycode(value);
+      else if (strcmp(key, "hardDrop") == 0)
+        settings->keyBindings.hardDrop = StringToKeycode(value);
+      else if (strcmp(key, "quit") == 0)
+        settings->keyBindings.quit = StringToKeycode(value);
+    }
   }
 
-  return !(width_error || height);
+  fclose(file);
+  return true;
 }
