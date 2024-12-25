@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -19,6 +20,12 @@ typedef struct {
 #include "game/game.h"
 #include "graphics/graphics.h"
 
+=======
+<<<<<<< HEAD
+#include "game/game.h"
+#include "graphics/graphics.h"
+
+>>>>>>> Stashed changes
 int main(int argc, char *argv[])
 {
   SDL_Window *window = NULL;
@@ -99,6 +106,9 @@ typedef struct {
     int x, y;           
 } PieceL;
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 int main(int argc, char* argv[]) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -203,6 +213,10 @@ int main(int argc, char* argv[]) {
 
     return 0;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+>>>>>>> 6a152940111a1e357f5bea4c4f2a92fca5799549
+>>>>>>> Stashed changes
 =======
 >>>>>>> 6a152940111a1e357f5bea4c4f2a92fca5799549
 >>>>>>> Stashed changes
